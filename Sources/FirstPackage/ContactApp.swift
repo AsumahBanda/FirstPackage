@@ -44,58 +44,26 @@ public struct ContactAppView: UIViewControllerRepresentable {
 }
 
 public class ContactViewController: UINavigationController {
-
+    
     // MARK: public variables
-
+    
     var navController: UINavigationController!
     var name: String = ""
     var emails: [String] = []
     var phoneNumbers: [String] = []
     var iconColor: UIColor = .white
     var imageData: Data?
-
+    var contact: Contact = Contact()
+    
     // MARK: life cycle methods
-
-   public override func viewDidLoad() {
+    
+    public override func viewDidLoad() {
         let controller =  CNContactViewController(
-            forNewContact: toCNContact()
+            forNewContact: contact.toCNMutableContact()
         )
         controller.delegate = self
         viewControllers.append(controller)
         super.viewDidLoad()
-    }
-
-    // MARK: private methods
-
-    private func toCNContact() -> CNMutableContact {
-        let contact = CNMutableContact()
-        contact.imageData = imageData
-        contact.namePrefix = name
-        contact.phoneNumbers = parseNumbers()
-        contact.emailAddresses = parseEmails()
-        return contact
-    }
-
-    private func parseNumbers() -> [CNLabeledValue<CNPhoneNumber>] {
-        phoneNumbers.map { number in
-                .init(
-                    label: nil,
-                    value: CNPhoneNumber(
-                        stringValue: number
-                    )
-                )
-        }
-    }
-
-    private func parseEmails() -> [CNLabeledValue<NSString>] {
-        emails.map { email in
-                .init(
-                    label: nil,
-                    value: NSString(
-                        string: email
-                    )
-                )
-        }
     }
 }
 
