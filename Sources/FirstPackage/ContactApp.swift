@@ -11,22 +11,10 @@ import ContactsUI
 #if canImport(UIKit)
 import UIKit
 #endif
-
 #if canImport(SwiftUI)
 import SwiftUI
 #endif
 
-public struct Contact {
-    let name: String
-    let phone: String
-    let email: String
-    
-   public init(name: String, phone: String, email: String) {
-        self.name = name
-        self.phone = phone
-        self.email = email
-    }
-}
 
 #if os(iOS)
 public struct ContactAppView: UIViewControllerRepresentable {
@@ -47,13 +35,6 @@ public struct ContactAppView: UIViewControllerRepresentable {
     
     public func makeUIViewController(context: Context) -> ContactViewController {
         let contactViewController = ContactViewController()
-        debugPrint("image data \(imageData)")
-        contactViewController.setContactDetails(
-            name: contact.name,
-            emails: [contact.email],
-            phoneNumbers: [contact.phone],
-            imageData: imageData
-        )
         return contactViewController
     }
 
@@ -82,20 +63,6 @@ public class ContactViewController: UINavigationController {
         controller.delegate = self
         viewControllers.append(controller)
         super.viewDidLoad()
-    }
-
-    // MARK: public methods
-
-    func setContactDetails(
-        name: String,
-        emails: [String],
-        phoneNumbers: [String],
-        imageData: Data? = nil
-    ) {
-        self.name = name
-        self.emails = emails
-        self.phoneNumbers = phoneNumbers
-        self.imageData = imageData
     }
 
     // MARK: private methods
