@@ -10,6 +10,9 @@ import Contacts
 import ContactsUI
 #if canImport(UIKit)
 import UIKit
+#endif
+
+#if canImport(SwiftUI)
 import SwiftUI
 #endif
 
@@ -21,11 +24,21 @@ public struct Contact {
 
 #if os(iOS)
 public struct ContactAppView: UIViewControllerRepresentable {
+    
+    // MARK: - public variables
+    
     let contact: Contact
     let imageData: Data
     public typealias UIViewControllerType = ContactViewController
     @Environment(\.colorScheme) var colorScheme
+    
+    // MARK: - Lifecycle methods
 
+   public init(contact: Contact, imageData: Data) {
+       self.contact = contact
+       self.imageData = imageData
+   }
+    
     public func makeUIViewController(context: Context) -> ContactViewController {
         let contactViewController = ContactViewController()
         debugPrint("image data \(imageData)")
