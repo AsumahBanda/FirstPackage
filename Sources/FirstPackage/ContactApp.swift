@@ -35,6 +35,7 @@ public struct ContactAppView: UIViewControllerRepresentable {
     
     public func makeUIViewController(context: Context) -> ContactViewController {
         let contactViewController = ContactViewController()
+        contactViewController.setContact(contact)
         return contactViewController
     }
 
@@ -48,22 +49,23 @@ public class ContactViewController: UINavigationController {
     // MARK: public variables
     
     var navController: UINavigationController!
-    var name: String = ""
-    var emails: [String] = []
-    var phoneNumbers: [String] = []
-    var iconColor: UIColor = .white
-    var imageData: Data?
     var contact: Contact = Contact()
     
     // MARK: life cycle methods
     
     public override func viewDidLoad() {
+        print("contact \(contact)")
         let controller =  CNContactViewController(
             forNewContact: contact.toCNMutableContact()
         )
         controller.delegate = self
         viewControllers.append(controller)
         super.viewDidLoad()
+    }
+    
+    // MARK: - public methods
+    func setContact(_ contact: Contact) {
+        self.contact = contact
     }
 }
 
