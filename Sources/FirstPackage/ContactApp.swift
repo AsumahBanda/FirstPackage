@@ -11,6 +11,7 @@ import ContactsUI
 #if canImport(UIKit)
 import UIKit
 import SwiftUI
+#endif
 
 public struct Contact {
     let name: String
@@ -18,6 +19,7 @@ public struct Contact {
     let email: String
 }
 
+#if os(iOS)
 public struct ContactAppView: UIViewControllerRepresentable {
     let contact: Contact
     let imageData: Data
@@ -126,5 +128,4 @@ extension ContactViewController: CNContactViewControllerDelegate {
         true
     }
 }
-
 #endif
