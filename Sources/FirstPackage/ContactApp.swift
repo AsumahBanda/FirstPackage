@@ -12,7 +12,7 @@ import ContactsUI
 import UIKit
 import SwiftUI
 
-struct Contact {
+public struct Contact {
     let name: String
     let phone: String
     let email: String
