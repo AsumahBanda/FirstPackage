@@ -20,6 +20,12 @@ public struct Contact {
     let name: String
     let phone: String
     let email: String
+    
+   public init(name: String, phone: String, email: String) {
+        self.name = name
+        self.phone = phone
+        self.email = email
+    }
 }
 
 #if os(iOS)
